@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pramisha KC — AI & Automation Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0E1A;
+    --surface: #111827;
+    --surface2: #1C2537;
+    --accent: #6EE7B7;
+    --accent2: #818CF8;
+    --accent3: #F472B6;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+    --border: rgba(110,231,183,0.15);
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.08) 0%, transparent 70%);
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(129,140,248,0.06) 0%, transparent 70%);
+    top: 20%;
+    left: 10%;
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 800px; position: relative; z-index: 1; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .name-highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--muted);
+    margin: 24px 0 40px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #0A0E1A;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: #4ADE80; transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0 60px;
+    overflow: hidden;
+  }
+
+  .stat {
+    flex: 1;
+    padding: 32px 40px;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--surface); }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; position: relative; z-index: 1; }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--surface); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .skill-card:hover { border-color: rgba(110,231,183,0.3); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .skill-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(110,231,183,0.08);
+    border: 1px solid rgba(110,231,183,0.2);
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+  }
+
+  .timeline-item {
+    padding-left: 40px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(110,231,183,0.5);
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .timeline-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .timeline-desc li {
+    margin-bottom: 6px;
+    padding-left: 16px;
+    position: relative;
+    list-style: none;
+  }
+
+  .timeline-desc li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    border-color: rgba(110,231,183,0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .project-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(110,231,183,0.08);
+    border: 1px solid var(--border);
+  }
+
+  .project-links { display: flex; gap: 8px; }
+
+  .project-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .project-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  .project-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .project-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  .project-impact {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: rgba(110,231,183,0.08);
+    border: 1px solid rgba(110,231,183,0.15);
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+  }
+
+  .contact-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 36px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+
+  .contact-card-icon { font-size: 1.5rem; }
+
+  .contact-card-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .contact-card-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .footer-accent { color: var(--accent); }
+
+  /* SCROLL ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 60px 24px; }
+    .stats-bar { margin: 0 24px; flex-direction: column; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">pramisha.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:pramishakc3377@gmail.com" class="btn-primary" style="padding:10px 20px;font-size:0.8rem;">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for Graduate Roles · Sydney, AU</div>
+    <h1>
+      Hi, I'm<br>
+      <span class="name-highlight">Pramisha KC</span>
+    </h1>
+    <p class="hero-subtitle">
+      AI & Automation Specialist with 4+ years building intelligent systems across healthcare, banking, and technology. Currently completing a Master of IT (AI) at Charles Darwin University — graduating November 2026.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work →</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat fade-in">
+    <div class="stat-number">4+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-number">150+</div>
+    <div class="stat-label">Bugs Caught in Production</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-number">40%</div>
+    <div class="stat-label">Reduction in Manual Work</div>
+  </div>
+  <div class="stat fade-in">
+    <div class="stat-number">5+</div>
+    <div class="stat-label">Industries Served</div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-eyebrow">What I Work With</div>
+  <h2 class="section-title">Skills & Technologies</h2>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🤖</div>
+      <h3>AI & Machine Learning</h3>
+      <div class="skill-tags">
+        <span class="tag">OpenAI API</span>
+        <span class="tag">LLM Integration</span>
+        <span class="tag">RAG Pipelines</span>
+        <span class="tag">NLP</span>
+        <span class="tag">AI Agents</span>
+        <span class="tag">Deep Learning</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🐍</div>
+      <h3>Python & Data Science</h3>
+      <div class="skill-tags">
+        <span class="tag">Python (Advanced)</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Django</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">☁️</div>
+      <h3>Cloud & DevOps</h3>
+      <div class="skill-tags">
+        <span class="tag">Microsoft Azure</span>
+        <span class="tag">Azure DevOps</span>
+        <span class="tag">Docker</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Jenkins</span>
+        <span class="tag">GitHub</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🗄️</div>
+      <h3>Data & Databases</h3>
+      <div class="skill-tags">
+        <span class="tag">SQL (Advanced)</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">ETL</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">⚙️</div>
+      <h3>Automation & Testing</h3>
+      <div class="skill-tags">
+        <span class="tag">Robot Framework</span>
+        <span class="tag">Selenium</span>
+        <span class="tag">PyTest</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Webhooks</span>
+        <span class="tag">SOAP/XML</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">💼</div>
+      <h3>Microsoft Power Platform</h3>
+      <div class="skill-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Power Automate</span>
+        <span class="tag">Power Apps</span>
+        <span class="tag">Copilot Studio</span>
+        <span class="tag">SharePoint</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">Where I've Worked</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Dec 2025 — Mar 2026</div>
+      <div class="timeline-title">AI & Automation Engineer</div>
+      <div class="timeline-company">Ctrack · Macquarie Park, Sydney NSW</div>
+      <ul class="timeline-desc">
+        <li>Built AI-assisted GIS Reporting Engine replacing 5+ hours of weekly manual work with 100% accuracy</li>
+        <li>Automated multi-layer API validation pipelines (SOAP, XML, REST, SAML)</li>
+        <li>Reduced test flakiness and maintenance overhead by 40% through adaptive automation logic</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Jan 2024 — Jun 2024</div>
+      <div class="timeline-title">Software Engineer II</div>
+      <div class="timeline-company">Infinite Software Services · Remote (Global Team)</div>
+      <ul class="timeline-desc">
+        <li>Applied AI-assisted testing to Medical Intelligence platforms, identifying 150+ critical defects</li>
+        <li>Architected self-healing automation frameworks adopted by 10+ global engineers</li>
+        <li>Increased test coverage by 25% across international product teams</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Sept 2021 — Jan 2023</div>
+      <div class="timeline-title">Digital Banking Assistant / Data Analyst</div>
+      <div class="timeline-company">Nabil Bank Ltd. · Nepal</div>
+      <ul class="timeline-desc">
+        <li>Built Automated Reconciliation Bot reducing manual processing time by 30%</li>
+        <li>Developed Power BI dashboards with intelligent drill-down analytics for executive decision-making</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Nov 2019 — Jul 2021</div>
+      <div class="timeline-title">Associate Software Engineer</div>
+      <div class="timeline-company">Vacker360 Pvt. Ltd. · Nepal</div>
+      <ul class="timeline-desc">
+        <li>Architected full-stack IoT temperature monitoring platform with real-time anomaly detection</li>
+        <li>Deployed custom Odoo ERP modules with intelligent workflow automation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--surface);">
+  <div class="section-eyebrow">What I've Built</div>
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🔍</div>
+        <div class="project-links">
+          <a href="https://github.com/pramishakc3/rag-document-assistant" class="project-link" target="_blank">↗</a>
+        </div>
+      </div>
+      <h3>RAG Document Assistant</h3>
+      <p>Production-ready Retrieval-Augmented Generation pipeline. Upload any PDF or text document and ask questions in natural language — powered by OpenAI embeddings and Supabase pgvector semantic search.</p>
+      <div class="project-impact">⚡ Grounded answers from any document in seconds</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">OpenAI API</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">pgvector</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🚛</div>
+        <div class="project-links">
+          <a href="#" class="project-link">↗</a>
+        </div>
+      </div>
+      <h3>AI Fleet Analytics Engine</h3>
+      <p>Autonomous GIS reporting system applying intelligent multi-window navigation, asynchronous data orchestration, and pattern-based fleet analytics for real-time vehicle telemetry data.</p>
+      <div class="project-impact">⚡ Replaced 5+ hours of weekly manual work with zero errors</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Selenium</span>
+        <span class="tag">GIS</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🏦</div>
+        <div class="project-links">
+          <a href="#" class="project-link">↗</a>
+        </div>
+      </div>
+      <h3>Automated Reconciliation Bot</h3>
+      <p>Smart financial data integration tool using rule-based AI logic to consolidate disparate loan data sources, detect discrepancies, and ensure 100% consistency for bank audits.</p>
+      <div class="project-impact">⚡ Reduced manual processing time by 30%</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">ETL</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🌡️</div>
+        <div class="project-links">
+          <a href="#" class="project-link">↗</a>
+        </div>
+      </div>
+      <h3>IoT Real-Time Monitoring Platform</h3>
+      <p>Full-stack intelligent monitoring platform integrating live sensor feeds with Django backend, providing real-time data visualisation and automated alert triggers based on anomaly detection.</p>
+      <div class="project-impact">⚡ Real-time anomaly detection across sensor networks</div>
+      <div class="skill-tags">
+        <span class="tag">Django</span>
+        <span class="tag">Python</span>
+        <span class="tag">IoT</span>
+        <span class="tag">REST APIs</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🧪</div>
+        <div class="project-links">
+          <a href="#" class="project-link">↗</a>
+        </div>
+      </div>
+      <h3>Self-Healing Automation Framework</h3>
+      <p>Re-engineered test suite with adaptive wait logic and intelligent state management to handle asynchronous data loading, dramatically reducing false failure alerts and maintenance time.</p>
+      <div class="project-impact">⚡ Reduced false failures and maintenance by 40%</div>
+      <div class="skill-tags">
+        <span class="tag">Robot Framework</span>
+        <span class="tag">Python</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Jenkins</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon">🏥</div>
+        <div class="project-links">
+          <a href="#" class="project-link">↗</a>
+        </div>
+      </div>
+      <h3>AI-Assisted QA Framework</h3>
+      <p>Modular pipeline-integrated quality framework for Medical Intelligence platforms, applying pattern-based defect detection strategies to surface critical bugs across international product teams.</p>
+      <div class="project-impact">⚡ Detected 150+ critical defects, 25% coverage increase</div>
+      <div class="skill-tags">
+        <span class="tag">Selenium</span>
+        <span class="tag">C#</span>
+        <span class="tag">Jenkins</span>
+        <span class="tag">Azure DevOps</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-eyebrow">Get In Touch</div>
+  <h2 class="section-title">Let's Work Together</h2>
+  <p style="color: var(--muted); max-width: 480px; margin: 0 auto; font-size: 1rem; line-height: 1.7;">
+    I am actively looking for graduate IT and AI roles in Sydney. Open to full-time, part-time, and graduate program opportunities.
+  </p>
+  <div class="contact-grid">
+    <a href="mailto:pramishakc3377@gmail.com" class="contact-card">
+      <div class="contact-card-icon">✉️</div>
+      <div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value">pramishakc3377@gmail.com</div>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/pramisha-kc-456513176" class="contact-card" target="_blank">
+      <div class="contact-card-icon">💼</div>
+      <div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-value">pramisha-kc-456513176</div>
+      </div>
+    </a>
+    <a href="https://github.com/pramishakc3" class="contact-card" target="_blank">
+      <div class="contact-card-icon">🐙</div>
+      <div>
+        <div class="contact-card-label">GitHub</div>
+        <div class="contact-card-value">pramishakc3</div>
+      </div>
+    </a>
+    <a href="tel:+61432360475" class="contact-card">
+      <div class="contact-card-icon">📱</div>
+      <div>
+        <div class="contact-card-label">Phone</div>
+        <div class="contact-card-value">+61 432 360 475</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span class="footer-accent">Pramisha KC</span> · Built with passion in Sydney 🇦🇺</p>
+  <p>Master of IT (AI) · Charles Darwin University · Graduating Nov 2026</p>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth nav
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
