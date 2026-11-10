@@ -7,7 +7,7 @@ Live site: https://pramishakc3.github.io/
 
 ## What is inside
 - About, skills, experience and featured projects
-- Link to my CV: [https://drive.google.com/file/d/1nk25qZG_4xdxw-Z08GAM8iDut5vMm0mb/view?usp=drive_link](Pramisha_KC_Graduate_CV.pdf)
+- Link to my CV: [https://drive.google.com/file/d/1nk25qZG_4xdxw-Z08GAM8iDut5vMm0mb/view?usp=drive_link]
 
 ## Built with
 Plain HTML, CSS and JavaScript, hosted on GitHub Pages.
